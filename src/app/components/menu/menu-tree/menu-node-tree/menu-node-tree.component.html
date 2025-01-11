@@ -1,0 +1,30 @@
+<li class="cursor-pointer" [class.inside-ul]="node[recursionKey] && node[recursionKey].length">
+    <div> 
+        <i class="tree-icon file-icon" role="presentation" (click)="showChildrenNode = !showChildrenNode"></i>
+        <span [class]="node.id == id ? 'active' : ''">{{ node[displayKey] || node?.title}}</span>
+        <div class="tree-options">
+            <a href="javascript:void(0)" *hasPermission="'category.edit'"
+                [routerLink]="['/menu/edit', node?.id]">
+                <i class="ri-pencil-line text-success"></i>
+            </a>
+            <a href="javascript:void(0)" *hasPermission="'category.destroy'"
+                (click)="DeleteModal.openModal('delete', node)">
+                <i class="ri-delete-bin-7-line text-danger"></i>
+            </a>
+        </div>
+    </div>
+    <ul *ngIf="node[recursionKey] && node[recursionKey].length && showChildrenNode">
+        <app-menu-node-tree
+            [node]="node" 
+            [displayKey]="displayKey" 
+            [recursionKey]="recursionKey" 
+            *ngFor="let node of node[recursionKey]">
+        </app-menu-node-tree>
+    </ul>
+</li>
+
+<!-- Delete Modal -->
+<app-delete-modal 
+    #deleteModal
+    (deleteItem)="delete($event.actionToPerform,$event.data)">
+</app-delete-modal>

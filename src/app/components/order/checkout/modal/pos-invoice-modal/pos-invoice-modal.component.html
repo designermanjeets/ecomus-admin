@@ -1,0 +1,66 @@
+<ng-template #posInvoice let-modal>
+    <div class="modal-body">
+        <div class="ticket">
+            <div class="title-text text-center">
+                <h4>{{(setting$ | async)?.general?.site_name ? (setting$ | async)?.general?.site_name : ''}}</h4>
+            </div>
+            <ul class="centered">
+                <li>{{ 'order_number' }}: {{ order?.order_number }}</li>
+                <li>{{ 'date' }}: <span>{{ order.created_at | date: 'dd MMM yyyy hh:mm:a'}}</span></li>
+                <li *ngIf="!order?.is_digital_only">{{ 'Address' }}: <span>
+                        {{ order?.shipping_address?.street }}
+                        {{ order?.shipping_address?.city }} {{ order?.shipping_address?.state?.name }} {{
+                        order?.shipping_address?.country?.name }}
+                        {{ order?.shipping_address?.pincode }}
+                    </span></li>
+                <li>{{ 'email' }}: <span>{{ order?.consumer?.email }}</span></li>
+                <li>{{ 'phone' }}: <span>{{ order?.shipping_address?.phone }}</span></li>
+                <li>{{ 'customer' }}: <span>{{order?.consumer?.name}}</span></li>
+            </ul>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="quantity">{{ 'qty' |translate }}.</th>
+                        <th class="description">{{ 'product_name' |translate}}</th>
+                        <th class="price">{{ 'price' |translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of order?.products">
+                        <td class="quantity">{{ product?.pivot?.quantity }}</td>
+                        <td class="description">{{ product?.pivot?.variation ? product?.pivot?.variation?.name :
+                            product?.name }}</td>
+                        <td class="price">{{ product?.pivot?.subtotal | currencySymbol }}</td>
+                    </tr>
+                    <tr class="total-box">
+                        <td colspan="2" class="text-end description">{{ 'total' }}:</td>
+                        <td class="price">{{ (order?.amount ? order?.amount : 0) | currencySymbol }}</td>
+                    </tr>
+                    <tr class="total-box" *ngIf="!order?.is_digital_only">
+                        <td colspan="2" class="text-end description">{{ 'shipping' }}:</td>
+                        <td class="price">{{ (order?.shipping_total ? order?.shipping_total : 0) | currencySymbol
+                            }}</td>
+                    </tr>
+                    <tr class="total-box">
+                        <td colspan="2" class="text-end description">{{ 'tax' }}:</td>
+                        <td class="price">{{ (order?.tax_total ? order?.tax_total : 0) | currencySymbol }}</td>
+                    </tr>
+                    <tr class="total-box">
+                        <td colspan="2" class="text-end description">{{ 'discount' }}:</td>
+                        <td class="price">{{ (order?.coupon_total_discount ? order?.coupon_total_discount : 0) |
+                            currencySymbol }}</td>
+                    </tr>
+                    <tr class="total-box">
+                        <td colspan="2" class="text-end description">{{ 'grandtotal' }}:</td>
+                        <td class="price">{{ (order?.total ? order?.total : 0) | currencySymbol }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="text-point">{{ 'thank_you_for_shopping' | translate }}</p>
+            <div class="modal-btn-group d-flex align-items-center gap-2 justify-content-center">
+                <button class="btn btn-sm btn-animation theme-bg-color" onclick="window.print();">{{ 'print' |translate}}</button>
+                <button class="btn btn-sm btn-outline" (click)="modal.dismiss('Cross click')">{{ 'cancel' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

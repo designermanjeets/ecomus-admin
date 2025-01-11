@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-xl-4 p-0">
+        <app-page-wrapper [gridClass]="'col-sm-12'" [title]="'categories'">
+            <div button *hasPermission="'category.create'">
+                <div ngbDropdown class="d-inline-block dropdown-box" *ngIf="categoryType == 'product' || type == 'edit'">
+                    <button type="button" class="btn btn-sm btn-outline" id="action" ngbDropdownToggle>
+                        {{ 'action' | translate }}
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="action" class="dropdown-menu dropdown-menu-end">
+                        <button ngbDropdownItem *ngIf="categoryType == 'product'" (click)="CSVModal.openModal()">{{ 'Bulk Import' | translate }}</button>
+                        <button ngbDropdownItem *ngIf="categoryType == 'product'" (click)="export()">{{ 'Export' | translate }}</button>
+                        <button ngbDropdownItem (click)="create(type)" *ngIf="type == 'edit'">{{ 'create' | translate }}</button>
+                    </div>
+                </div>
+            </div> 
+            <app-tree 
+                [data]="(category$ | async)?.data" 
+                [recursionKey]="'subcategories'" 
+                [type]="type"
+                [categoryType]="categoryType">
+            </app-tree>
+        </app-page-wrapper>
+    </div>
+    <div class="col-xl-8 p-0">
+        <app-form-category 
+            [categories]="(category$ | async)?.data" 
+            [type]="type" 
+            [categoryType]="categoryType"
+            *hasPermission="'category.'+type">
+        </app-form-category>
+    </div>
+</div>
+
+<app-import-csv-modal 
+    [module]="'category'"
+    #csvModal>
+</app-import-csv-modal>
