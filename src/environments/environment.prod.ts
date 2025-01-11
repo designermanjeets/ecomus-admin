@@ -4,8 +4,8 @@
 
 export const environment = {
     production: true,
-    URL: 'https://api.bogomenus.com/api/admin', // Change only the domain part, keeping "/api/admin" intact
-    storageURL: 'https://api.bogomenus.com'  // change only the laravel primary domain
+    URL: 'https://api.bogomenus.com/public/api/admin', // Change only the domain part, keeping "/api/admin" intact
+    storageURL: 'https://api.bogomenus.com/public'  // change only the laravel primary domain
 };
   
 /*
