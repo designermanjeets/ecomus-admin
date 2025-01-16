@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   URL: 'https://api.fashioncarft.com/public/api/admin', // Change only the domain part, keeping "/api/admin" intact
-  storageURL: 'https://api.fashioncarft.com/public/'  // change only the laravel primary domain
+  storageURL: 'https://api.fashioncarft.com/public'  // change only the laravel primary domain
 };
 
 /*
