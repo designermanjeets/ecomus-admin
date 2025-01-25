@@ -864,7 +864,9 @@ export class FormProductComponent {
   
   submit(redirect: boolean = true) {
     this.form.markAllAsTouched();
-    let action = new CreateProduct(this.form.value);
+    const formValue = this.form.value;
+    formValue['sale_price'] = this.form.value.price;
+    let action = new CreateProduct(formValue);
     
     // If product type simple then clear all variation
     if(['simple', 'external'].includes(this.form.controls['type'].value)) {
@@ -873,7 +875,7 @@ export class FormProductComponent {
     }
 
     if(this.type == 'edit' && this.id) {
-      action = new UpdateProduct(this.form.value, this.id);
+      action = new UpdateProduct(formValue, this.id);
     }
 
     if(this.form.valid) {
