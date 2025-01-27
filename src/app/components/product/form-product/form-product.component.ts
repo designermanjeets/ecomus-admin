@@ -865,7 +865,7 @@ export class FormProductComponent {
   submit(redirect: boolean = true) {
     this.form.markAllAsTouched();
     const formValue = this.form.value;
-    formValue['sale_price'] = this.form.value.price;
+    formValue['sale_price'] = (this.form.get('price')?.value - (this.form.get('price')?.value * this.form.get('discount')?.value)/100).toFixed(2);
     let action = new CreateProduct(formValue);
     
     // If product type simple then clear all variation
