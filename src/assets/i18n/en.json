@@ -172,6 +172,7 @@
     "create_category": "Create Category",
     "commission_rate": "Commission Rate",
     "select_parent": "Select Parent",
+    "allow_all_zone": "Allow All Zones",
     "icon": "Icon",
     "save_category": "Save Category",
     "update_category": "Update Category",

@@ -18,6 +18,7 @@ export interface Category {
     category_icon?: Attachment;
     category_icon_id?: number;
     commission_rate?: number;
+    is_allow_all_zone?: boolean | number;
     subcategories?: Category[];
     category_meta_image_id: number,
     category_meta_image: Attachment,

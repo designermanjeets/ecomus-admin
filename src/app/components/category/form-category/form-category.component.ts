@@ -38,6 +38,7 @@ export class FormCategoryComponent {
         parent_id: new FormControl(),
         type: new FormControl(this.categoryType, []),
         commission_rate: new FormControl(),
+        is_allow_all_zone: new FormControl(true),
         category_image_id: new FormControl(),
         category_icon_id: new FormControl(),
         category_meta_image_id: new FormControl(),
@@ -71,6 +72,7 @@ export class FormCategoryComponent {
           parent_id: this.category?.parent_id,
           type: this.category?.type,
           commission_rate: this.category?.commission_rate,
+          is_allow_all_zone: !!this.category?.is_allow_all_zone,
           category_image_id: this.category?.category_image_id,
           category_icon_id: this.category?.category_icon_id,
           category_meta_image_id: this.category?.category_meta_image_id,
@@ -122,6 +124,7 @@ export class FormCategoryComponent {
             this.form.reset();
             this.form.controls['category_image_id'].setValue('');
             this.form.controls['category_icon_id'].setValue('');
+            this.form.controls['is_allow_all_zone'].setValue(true);
             this.form.controls['status'].setValue(true);
           }else {
             if(this.form.value.type === 'product'){

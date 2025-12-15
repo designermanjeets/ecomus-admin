@@ -172,6 +172,7 @@
     "create_category": "créer une catégorie",
     "commission_rate": "Taux de commission",
     "select_parent": "Sélectionnez Parent",
+    "allow_all_zone": "Autoriser toutes les zones",
     "icon": "Icône",
     "save_category": "Enregistrer la catégorie",
     "update_category": "Mettre à jour la catégorie",

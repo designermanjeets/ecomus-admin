@@ -55,6 +55,14 @@
                 (selectedFiles)="selectMetaImage($event)">
             </app-image-upload>
         </app-form-fields>
+        <app-form-fields [label]="'allow_all_zone' | translate " [for]="'is_allow_all_zone'" [required]="false">
+            <div class="form-check form-switch ps-0">
+                <label class="switch">
+                    <input type="checkbox" id="is_allow_all_zone" formControlName="is_allow_all_zone">
+                    <span class="switch-state"></span>
+                </label>
+            </div>
+        </app-form-fields>
         <app-form-fields [label]="'status' | translate " [for]="'status'" [required]="false">
             <div class="form-check form-switch ps-0">
                 <label class="switch">
