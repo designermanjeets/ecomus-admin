@@ -73,6 +73,7 @@ export interface Product {
     brand: Brand;
     store: Stores;
     store_name: string;
+    category_name: string;
     orders_count: string | number;
     order_amount: string | number;
     attribute_values: [];

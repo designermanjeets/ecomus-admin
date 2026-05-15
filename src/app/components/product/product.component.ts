@@ -78,9 +78,9 @@ export class ProductComponent {
       { title: "sku", dataField: "sku", sortable: true, sort_direction: 'desc' },
       { title: "price", dataField: "sale_price", type: 'price', sortable: true, sort_direction: 'desc' },
       { title: "stock", dataField: "stock" },
+      { title: "category", dataField: "category_name" },
       { title: "store", dataField: "store_name" },
-      { title: "approved", dataField: "is_approved", type: "switch", canAllow: ['admin'] },
-      { title: "status", dataField: "status", type: "switch" },
+      { title: "date", dataField: "created_at", type: 'date', date_format: 'dd MMM yyyy HH:mm' },
     ],
     rowActions: [
       { label: "Edit", actionToPerform: "edit", icon: "ri-pencil-line", permission: "product.edit" },
@@ -108,6 +108,7 @@ export class ProductComponent {
     this.product$.subscribe(product => {
       let products = product?.data?.filter((element: Product) => {
         element.stock = element.stock_status ? `<div class="status-${element.stock_status}"><span>${element.stock_status.replace(/_/g, " ")}</span></div>` : '-';
+        element.category_name = element?.category?.name || element?.categories?.[0]?.name || '-';
         element.store_name = element?.store ? element?.store?.store_name : '-';
         return element;
       });

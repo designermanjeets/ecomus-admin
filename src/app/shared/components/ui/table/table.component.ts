@@ -55,6 +55,7 @@ export class TableComponent {
   public selected: number[] = [];
   public permissions: string[] = [];
   public role: string;
+  public activeActionRow: any = null;
 
   public hoveredDate: NgbDate | null = null;
 	public fromDate: NgbDate | null;
@@ -144,6 +145,10 @@ export class TableComponent {
     }
     this.renderer.addClass(this.document.body, 'loader-none');
     this.tableChanged.emit(this.tableData);
+  }
+
+  toggleActions(rowId: any) {
+    this.activeActionRow = this.activeActionRow === rowId ? null : rowId;
   }
 
   onActionClicked(actionType: string, rowData: any, value?: number) {

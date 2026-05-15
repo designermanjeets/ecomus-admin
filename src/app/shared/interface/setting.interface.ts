@@ -85,6 +85,7 @@ export interface General {
    site_tagline:string;
    default_timezone:string;
    default_currency_id: number;
+   default_language_id?: number | null;
    admin_site_language_direction: string;
    min_order_amount:number;
    min_order_free_shipping:number;

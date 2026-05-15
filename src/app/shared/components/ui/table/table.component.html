@@ -191,15 +191,22 @@
                                 <i [class]="'ri-lock-line'"></i>
                             </a>
                             <ng-template #action>
-                                <ng-container *ngFor="let action of tableConfig?.rowActions">
-                                    <ng-container *hasPermission="action.permission">
-                                        <li *ngIf="(action?.conditional && isConditionMet(action?.conditional, columnData)) || !action?.conditional">
-                                            <a href="javascript:void(0)" (click)="action?.actionToPerform == 'delete' 
-                                                    ? DeleteModal.openModal('delete', columnData) 
-                                                    : onActionClicked(action?.actionToPerform.toString(), columnData)">
-                                                <i [class]="action?.icon"></i>
-                                            </a>
-                                        </li>
+                                <li>
+                                    <a href="javascript:void(0)" (click)="toggleActions(columnData.id); $event.stopPropagation()">
+                                        <i class="ri-more-2-fill"></i>
+                                    </a>
+                                </li>
+                                <ng-container *ngIf="activeActionRow === columnData.id">
+                                    <ng-container *ngFor="let action of tableConfig?.rowActions">
+                                        <ng-container *hasPermission="action.permission">
+                                            <li *ngIf="(action?.conditional && isConditionMet(action?.conditional, columnData)) || !action?.conditional">
+                                                <a href="javascript:void(0)" (click)="action?.actionToPerform == 'delete'
+                                                        ? DeleteModal.openModal('delete', columnData)
+                                                        : onActionClicked(action?.actionToPerform.toString(), columnData)">
+                                                    <i [class]="action?.icon"></i>
+                                                </a>
+                                            </li>
+                                        </ng-container>
                                     </ng-container>
                                 </ng-container>
                             </ng-template>
